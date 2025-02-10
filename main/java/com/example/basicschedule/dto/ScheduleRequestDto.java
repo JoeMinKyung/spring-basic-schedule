@@ -2,6 +2,7 @@ package com.example.basicschedule.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,9 @@ public class ScheduleRequestDto {
     @JsonFormat(pattern = "yyyy-MM-dd") // 날짜 포멧 재한
     private LocalDate deadline;
 
-    private boolean isComplete;
     private String task;
+
+    @Setter
+    private boolean isCompleted;
+
 }

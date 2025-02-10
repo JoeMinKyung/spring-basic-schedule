@@ -18,9 +18,9 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleResponseDto save(ScheduleRequestDto dto) {
-        Schedule schedule = new Schedule(dto.getWriter(), dto.getDeadline(), dto.getTask());
+        Schedule schedule = new Schedule(dto.getWriter(), dto.getDeadline(), dto.isCompleted(), dto.getTask());
         Schedule savedSchedule = scheduleRepository.save(schedule);
-        return new ScheduleRequestDto(savedSchedule.getId(), savedSchedule.getWriter(), savedSchedule.getCreatedAt(),
+        return new ScheduleResponseDto(savedSchedule.getId(), savedSchedule.getWriter(), savedSchedule.getCreatedAt(),
                 savedSchedule.getUpdatedAt(), savedSchedule.getDeadline(), savedSchedule.isCompleted(), savedSchedule.getTask());
 
     }
@@ -52,7 +52,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Schedule not found")
         );
-        schedule.update(dto.getWriter(), dto.getTask(), dto.isComplete(), dto.getTask());
+        schedule.update(dto.getWriter(), dto.getDeadline(), dto.isCompleted(), dto.getTask());
         return new ScheduleResponseDto(schedule.getId(), schedule.getWriter(), schedule.getCreatedAt(),
                 schedule.getUpdatedAt(), schedule.getDeadline(), schedule.isCompleted(), schedule.getTask());
     }
