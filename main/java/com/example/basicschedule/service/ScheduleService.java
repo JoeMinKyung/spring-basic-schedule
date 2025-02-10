@@ -46,4 +46,23 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule.getId(), schedule.getWriter(), schedule.getCreatedAt(),
                 schedule.getUpdatedAt(), schedule.getDeadline(), schedule.isCompleted(), schedule.getTask());
     }
+
+    @Transactional
+    public ScheduleResponseDto update(Long id, ScheduleRequestDto dto) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Schedule not found")
+        );
+        schedule.update(dto.getWriter(), dto.getTask(), dto.isComplete(), dto.getTask());
+        return new ScheduleResponseDto(schedule.getId(), schedule.getWriter(), schedule.getCreatedAt(),
+                schedule.getUpdatedAt(), schedule.getDeadline(), schedule.isCompleted(), schedule.getTask());
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        if(!scheduleRepository.existsById(id)) {
+            throw new IllegalArgumentException("Schedule not found");
+        }
+
+        scheduleRepository.deleteById(id);
+    }
 }

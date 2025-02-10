@@ -30,4 +30,14 @@ public class ScheduleController {
     public ScheduleResponseDto findById(@PathVariable Long id){
         return scheduleService.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public ScheduleResponseDto update(@PathVariable Long id, @RequestBody ScheduleRequestDto dto){
+        return scheduleService.update(id,dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        scheduleRepository.deleteById(id);
+    }
 }
