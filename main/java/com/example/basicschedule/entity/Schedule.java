@@ -41,4 +41,12 @@ public class Schedule {
         this.isCompleted = false;
         this.task = task;
     }
+
+    public void update(String writer, LocalDateTime deadline, String task) {
+        this.writer = writer;
+        this.deadline = deadline;
+        this.isCompleted = false;
+        this.task = task;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
