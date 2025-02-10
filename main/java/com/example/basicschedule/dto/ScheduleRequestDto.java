@@ -1,8 +1,8 @@
 package com.example.basicschedule.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ public class ScheduleRequestDto {
 
     private String task;
 
-    @Setter
+    @JsonProperty("completed")  // JSON에서 "completed"로 전달된 값을 "isCompleted"로 매핑
     private boolean isCompleted;
 
 }
