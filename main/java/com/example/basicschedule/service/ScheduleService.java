@@ -37,4 +37,13 @@ public class ScheduleService {
         }
         return dtos;
     }
+
+    @Transactional(readOnly = true)
+    public ScheduleResponseDto findById(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Schedule not found")
+        );
+        return new ScheduleResponseDto(schedule.getId(), schedule.getWriter(), schedule.getCreatedAt(),
+                schedule.getUpdatedAt(), schedule.getDeadline(), schedule.isCompleted(), schedule.getTask());
+    }
 }
